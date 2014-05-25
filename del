@@ -1,0 +1,9 @@
+#!/bin/bash
+revisiondate="$(date +"%Y-%m-%d-%a-%R" | sed 's/://')"
+mkdir -p .rollback/"$revisiondate/"
+mv "$@" .rollback/"$revisiondate/"
+
+for i in $@
+do
+	rightlink .rollback/"$revisiondate"/"$i" "$HOME"/.rollback/"$(realpath "$i")"/"$revisiondate"
+done
